@@ -1,0 +1,5 @@
+src/
+pkg/
+kernel/
+overlays/
+patch-*.xz

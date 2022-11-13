@@ -1,0 +1,44 @@
+diff --git a/arch/arm64/boot/dts/amlogic/Makefile b/arch/arm64/boot/dts/amlogic/Makefile
+index 8e798c3789f9..1d3a981c276d 100644
+--- a/arch/arm64/boot/dts/amlogic/Makefile
++++ b/arch/arm64/boot/dts/amlogic/Makefile
+@@ -50,5 +50,7 @@ dtb-$(CONFIG_ARCH_MESON) += meson-sm1-sei610.dtb
+ dtb-$(CONFIG_ARCH_MESON) += meson-sm1-khadas-vim3l.dtb
+ dtb-$(CONFIG_ARCH_MESON) += meson-sm1-odroid-c4.dtb
+ dtb-$(CONFIG_ARCH_MESON) += meson-a1-ad401.dtb
++DTC_FLAGS_meson-g12a-radxa-zero := -@
++DTC_FLAGS_meson-g12b-radxa-zero2 := -@
+ 
+ subdir-y	:= $(dts-dirs) overlay
+diff --git a/scripts/Makefile.dtbinst b/scripts/Makefile.dtbinst
+index 4a71f3d67abb..9770de5b22c1 100644
+--- a/scripts/Makefile.dtbinst
++++ b/scripts/Makefile.dtbinst
+@@ -45,4 +45,10 @@ PHONY += $(subdirs)
+ $(subdirs):
+ 	$(Q)$(MAKE) $(dtbinst)=$@ dst=$(patsubst $(obj)/%,$(dst)/%,$@)
+ 
++$(dst)/%.scr: $(obj)/%.scr
++	$(call cmd,dtb_install)
++
++$(dst)/README.overlays: $(src)/README.overlays
++	$(call cmd,dtb_install)
++
+ .PHONY: $(PHONY)
+diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
+index 539b6c2353a1..8d0d505d6447 100644
+--- a/scripts/Makefile.lib
++++ b/scripts/Makefile.lib
+@@ -421,6 +421,12 @@ quiet_cmd_uimage = UIMAGE  $@
+ 			-a $(UIMAGE_LOADADDR) -e $(UIMAGE_ENTRYADDR) \
+ 			-n $(UIMAGE_NAME) -d $< $@
+ 
++quiet_cmd_scr = MKIMAGE $@
++	cmd_scr=mkimage -C none -A $(ARCH) -T script -d $< $@
++
++$(obj)/%.scr: $(src)/%.cmd FORCE
++	$(call if_changed,scr)
++
+ # XZ
+ # ---------------------------------------------------------------------------
+ # Use xzkern to compress the kernel image and xzmisc to compress other things.

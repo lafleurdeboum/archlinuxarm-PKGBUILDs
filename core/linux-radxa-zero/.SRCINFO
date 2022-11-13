@@ -1,0 +1,51 @@
+pkgbase = linux-radxa-zero
+	pkgver = 5.10.69
+	pkgrel = 1
+	url = https://github.com/radxa
+	arch = aarch64
+	license = GPL2
+	makedepends = xmlto
+	makedepends = docbook-xsl
+	makedepends = kmod
+	makedepends = inetutils
+	makedepends = bc
+	makedepends = git
+	makedepends = uboot-tools
+	makedepends = vboot-utils
+	makedepends = dtc
+	makedepends = cpio
+	options = !strip
+	source = git+https://github.com/radxa/kernel.git#branch=linux-5.10.y-radxa-zero
+	source = http://www.kernel.org/pub/linux/kernel/v5.x/patch-5.10.69.xz
+	source = git+https://github.com/radxa/overlays#branch=main
+	source = 0001-VENDOR-Add-Radxa-overlays.patch
+	source = 0001-VENDOR-Radxa-Zero-Wi-Fi-fix.patch
+	source = 0001-net-smsc95xx-Allow-mac-address-to-be-set-as-a-parame.patch
+	source = 0002-arm64-dts-rockchip-disable-pwm0-on-rk3399-firefly.patch
+	source = 0003-arm64-dts-rockchip-add-usb3-controller-node-for-RK33.patch
+	source = 0004-arm64-dts-rockchip-enable-usb3-nodes-on-rk3328-rock6.patch
+	source = 0005-pinctrl-meson-g12a-add-missing-ir-options.patch
+	source = 60-linux.hook
+	source = 90-linux.hook
+	source = config
+	source = linux-radxa-zero.install
+	source = linux.preset
+	md5sums = SKIP
+	md5sums = 8a5ba3001b98eba8ce3f122e9fcf6790
+	md5sums = SKIP
+	md5sums = 6194f66953260e6c8f33ffb5eca7d1da
+	md5sums = 622d12a90af0bbf0f0c645c8ee1dfa4b
+	md5sums = ca6d37359e12aadec3ff3c13fbe7cc6c
+	md5sums = 9834da938723cde2f09b80ee9c2db88d
+	md5sums = a29581bb41d263dd1fce4b98b7ac77b2
+	md5sums = 78b533d939dd429057d3388e6d49c627
+	md5sums = 2b9d6fbe32a48f0bb6a42019a4e8a484
+	md5sums = ce6c81ad1ad1f8b333fd6077d47abdaf
+	md5sums = 3dc88030a8f2f5a5f97266d99b149f77
+	md5sums = f39e3a4e6e7ee88b79621e9711459bbb
+	md5sums = 9c795aa7ae26de6c214c20e878ee61bf
+	md5sums = 41cb5fef62715ead2dd109dbea8413d6
+
+pkgname = linux-radxa-zero
+
+pkgname = linux-radxa-zero-headers
